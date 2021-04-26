@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class AdminsController extends BaseController
 {
@@ -17,13 +16,6 @@ class AdminsController extends BaseController
     public function index()
     {
         $this->data['admins'] = Admin::GetAll();
-        /*
-        echo "<pre>";
-        print_r($this->data['admins']);
-        echo "</pre>";
-        die;
-         * 
-         */
         return view('Administrator.admins.index' , $this->data);
     }
     
@@ -114,7 +106,7 @@ class AdminsController extends BaseController
             return redirect()->back();
         }
         
-        $updateAdmin = Admin::UpdateAdmin($request , $admin);
+        $updateAdmin = Admin::updateAdmin($request , $admin);
         
         if(!$updateAdmin) 
         {
@@ -132,16 +124,10 @@ class AdminsController extends BaseController
         $id = $request->id;
         $admin = Admin::find($id);
 
-        if(!$admin) 
+        if(!$admin || !$admin->delete()) 
         {
             return response()->json(['status' => 0]);
         }
-
-        if(!$admin->delete())
-        { 
-            return response()->json(['status' => 0]);
-        }
-
         return response()->json(['status' => 1]);
     }
 }

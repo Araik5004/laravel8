@@ -39,7 +39,7 @@ class CarController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CarRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store( CarRequest $request )
@@ -92,7 +92,7 @@ class CarController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CarRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -127,16 +127,10 @@ class CarController extends BaseController
     public function destroy( $id )
     {
         $Car = Car::find( $id );
-        if ( !$Car )
+        if ( !$Car || !$Car->delete() )
         {
             return response()->json( ['status' => 0] );
         }
-
-        if ( !$Car->delete() )
-        {
-            return response()->json( ['status' => 0] );
-        }
-
         return response()->json( ['status' => 1] );
     }
 

@@ -37,8 +37,7 @@ class CarsSeeder extends Seeder
             $model_id = 0;
             if ( $models_id )
             {
-                shuffle( $models_id );
-                $model_id = $models_id[ 0 ];
+                $model_id = Arr::random($models_id);
             }
             shuffle( $colors );
             $cars[] = [

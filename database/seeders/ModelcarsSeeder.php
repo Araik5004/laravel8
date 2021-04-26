@@ -32,8 +32,7 @@ class ModelcarsSeeder extends Seeder
             $brand_id = 0;
             if ( $brands_id )
             {
-                shuffle( $brands_id );
-                $brand_id = $brands_id[ 0 ];
+                $brand_id = Arr::random($brands_id);
             }
             $models[] = [
                 'brand' => $brand_id,

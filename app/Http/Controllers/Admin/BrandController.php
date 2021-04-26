@@ -35,7 +35,7 @@ class BrandController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\BrandRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store( BrandRequest $request )
@@ -86,7 +86,7 @@ class BrandController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\BrandRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -121,12 +121,7 @@ class BrandController extends BaseController
     public function destroy( $id )
     {
         $Brand = Brand::find( $id );
-        if ( !$Brand )
-        {
-            return response()->json( ['status' => 0] );
-        }
-
-        if ( !$Brand->delete() )
+        if ( !$Brand || !$Brand->delete() )
         {
             return response()->json( ['status' => 0] );
         }

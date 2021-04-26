@@ -10,6 +10,10 @@ class Admin extends Model
 
     protected $fillable = array('name', 'surname', 'password', 'email');
 
+    /**
+     * Check if a user is logged in.
+     * @return bool
+     */
     public static function isLogin()
     {
 
@@ -52,7 +56,7 @@ class Admin extends Model
         return false;
     }
 
-    public static function UpdateAdmin( $request, $admin )
+    public static function updateAdmin( $request, $admin )
     {
         if ( $request->password )
         {
