@@ -33,8 +33,11 @@ class CarRequest extends FormRequest
         $rules[ 'year' ] = 'required';
 
         $data = $this->validationData();
+        
+        $method = $this->method();//POST || PUT
 
-        if ( isset( $data[ 'update' ] ) )
+        //update -> PUT 
+        if ( $method ===  "PUT"  )
         {
             if ( isset( $data[ 'fileuploader-list-file' ] ) && !empty( $data[ 'fileuploader-list-file' ] ) )
             {
