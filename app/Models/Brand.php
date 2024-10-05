@@ -37,7 +37,7 @@ class Brand extends Model
         return false;
     }
 
-    public static function GetAll( $paginate = 10, $order_field = 'sort', $ord_dir = 'asc' )
+    public static function getAll( $paginate = 10, $order_field = 'sort', $ord_dir = 'asc' )
     {
         $items = Brand::
                 select(

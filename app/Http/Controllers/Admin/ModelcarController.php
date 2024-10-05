@@ -30,7 +30,7 @@ class ModelcarController extends BaseController
      */
     public function create()
     {
-        $brands = Brand::GetAll();
+        $brands = Brand::getAll();
         return view( 'Administrator.modelcar.add', [
             'brands' => $brands
                 ] );
@@ -66,7 +66,7 @@ class ModelcarController extends BaseController
      */
     public function show( $id )
     {
-        
+
     }
 
     /**
@@ -83,7 +83,7 @@ class ModelcarController extends BaseController
         {
             return redirect()->back();
         }
-        $brands = Brand::GetAll();
+        $brands = Brand::getAll();
 
         return view( 'Administrator.modelcar.edit', [
             'item' => $item,

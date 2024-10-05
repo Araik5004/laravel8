@@ -12,7 +12,7 @@ class BrandController extends BaseController
 {
     public function index(): View
     {
-        $items = Brand::GetAll();
+        $items = Brand::getAll();
         return view('Administrator.brand.index', [
             'items' => $items
         ]);
