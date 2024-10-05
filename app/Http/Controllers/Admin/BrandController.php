@@ -25,9 +25,9 @@ class BrandController extends BaseController
 
     public function store(BrandRequest $request): Response
     {
-        $BrandInsert = Brand::AddBrands($request);
+        $brandInsert = Brand::addBrands($request);
 
-        if ( ! $BrandInsert) {
+        if ( ! $brandInsert) {
             $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
         }
@@ -63,9 +63,9 @@ class BrandController extends BaseController
             return redirect()->back();
         }
 
-        $BrandUpdate = Brand::UpdateBrands($request, $Brand);
+        $brandUpdate = Brand::updateBrands($request, $Brand);
 
-        if ( ! $BrandUpdate) {
+        if ( ! $brandUpdate) {
             $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
         }
@@ -77,8 +77,8 @@ class BrandController extends BaseController
 
     public function destroy(int $id): Response
     {
-        $Brand = Brand::find($id);
-        if ( ! $Brand || ! $Brand->delete()) {
+        $brand = Brand::find($id);
+        if ( ! $brand || ! $brand->delete()) {
             return response()->json(['status' => 0]);
         }
 
@@ -88,13 +88,13 @@ class BrandController extends BaseController
     public function changeStatus(Request $request): Response
     {
         $id = $request->get('id');
-        $Brand = Brand::find($id);
-        if ( ! $Brand) {
+        $brand = Brand::find($id);
+        if ( ! $brand) {
             return response()->json(['status' => 0]);
         }
 
-        $Brand->status = $Brand->status ? 0 : 1;
-        if ( ! $Brand->update()) {
+        $brand->status = $brand->status ? 0 : 1;
+        if ( ! $brand->update()) {
             return response()->json(['status' => 0]);
         }
 

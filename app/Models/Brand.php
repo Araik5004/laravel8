@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
 
-    public static function AddBrands( $request )
+    public static function addBrands( $request )
     {
         $brands = new Brand();
         $brands->status = $request->status === 'on' ? 1 : 0;
@@ -24,7 +24,7 @@ class Brand extends Model
         return false;
     }
 
-    public static function UpdateBrands( $request, Brand $brands )
+    public static function updateBrands( $request, Brand $brands )
     {
         $brands->status = $request->status === 'on' ? 1 : 0;
         $brands->name = $request->name;
