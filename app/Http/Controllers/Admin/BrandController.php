@@ -2,169 +2,119 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\Brand;
 use App\Http\Requests\BrandRequest;
+use App\Models\Brand;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class BrandController extends BaseController
 {
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
         $items = Brand::GetAll();
-        return view( 'Administrator.brand.index', [
+        return view('Administrator.brand.index', [
             'items' => $items
-                ] );
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): View
     {
-        return view( 'Administrator.brand.add' );
+        return view('Administrator.brand.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  App\Http\Requests\BrandRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store( BrandRequest $request )
+    public function store(BrandRequest $request): Response
     {
+        $BrandInsert = Brand::AddBrands($request);
 
-        $BrandInsert = Brand::AddBrands( $request );
-
-        if ( !$BrandInsert )
-        {
-            $request->session()->flash( 'error_add', trans( 'admin.error_add' ) );
+        if ( ! $BrandInsert) {
+            $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
         }
 
-        $request->session()->flash( 'dane_add', trans( 'admin.dane_add' ) );
+        $request->session()->flash('dane_add', trans('admin.dane_add'));
 
-        return redirect()->route( 'brands.index' );
+        return redirect()->route('brands.index');
+    }
+
+    public function show(int $id): void
+    {
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response | View
      */
-    public function show( $id )
+    public function edit(int $id)
     {
-        
-    }
+        $item = Brand::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit( $id )
-    {
-        $item = Brand::find( $id );
-
-        if ( !$item )
-        {
+        if ( ! $item) {
             return redirect()->back();
         }
 
-        return view( 'Administrator.brand.edit', ['item' => $item] );
+        return view('Administrator.brand.edit', ['item' => $item]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  App\Http\Requests\BrandRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update( BrandRequest $request, $id )
+    public function update(BrandRequest $request, int $id): Response
     {
-        $Brand = Brand::find( $id );
-        
-        if ( !$Brand )
-        {
+        $Brand = Brand::find($id);
+
+        if ( ! $Brand) {
             return redirect()->back();
         }
 
-        $BrandUpdate = Brand::UpdateBrands( $request, $Brand );
+        $BrandUpdate = Brand::UpdateBrands($request, $Brand);
 
-        if ( !$BrandUpdate )
-        {
-            $request->session()->flash( 'error_add', trans( 'admin.error_add' ) );
+        if ( ! $BrandUpdate) {
+            $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
         }
 
-        $request->session()->flash( 'dane_add', trans( 'admin.dane_add' ) );
+        $request->session()->flash('dane_add', trans('admin.dane_add'));
 
-        return redirect()->route( 'brands.index' );
+        return redirect()->route('brands.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy( $id )
+    public function destroy(int $id): Response
     {
-        $Brand = Brand::find( $id );
-        if ( !$Brand || !$Brand->delete() )
-        {
-            return response()->json( ['status' => 0] );
+        $Brand = Brand::find($id);
+        if ( ! $Brand || ! $Brand->delete()) {
+            return response()->json(['status' => 0]);
         }
 
-        return response()->json( ['status' => 1] );
+        return response()->json(['status' => 1]);
     }
 
-    public function changeStatus( Request $request )
+    public function changeStatus(Request $request): Response
     {
-        $ID = $request->id;
-        $Brand = Brand::find( $ID );
-        if ( !$Brand )
-        {
-            return response()->json( ['status' => 0] );
+        $id = $request->get('id');
+        $Brand = Brand::find($id);
+        if ( ! $Brand) {
+            return response()->json(['status' => 0]);
         }
 
         $Brand->status = $Brand->status ? 0 : 1;
-        if ( !$Brand->update() )
-        {
-            return response()->json( ['status' => 0] );
+        if ( ! $Brand->update()) {
+            return response()->json(['status' => 0]);
         }
 
-        return response()->json( ['status' => 1] );
+        return response()->json(['status' => 1]);
     }
 
-    public function orderingBrand( Request $request )
+    public function orderingBrand(Request $request): bool
     {
-        $orders = json_decode( $request->ordering );
-        foreach ( $orders as $value )
-        {
-            $question = Brand::find( $value[ 0 ] );
-            if ( $question )
-            {
-                $question->sort = $value[ 1 ];
+        $orders = json_decode($request->get('ordering'));
+        foreach ($orders as $value) {
+            $question = Brand::find($value[0]);
+            if ($question) {
+                $question->sort = $value[1];
             }
 
-            if ( !$question->save() )
-            {
+            if ( ! $question->save()) {
                 return false;
             }
         }
 
-        return "success";
+        return true;
     }
-
 }
