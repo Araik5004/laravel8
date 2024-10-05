@@ -2,30 +2,31 @@
 
 namespace App\Models;
 
-use Session;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
+/**
+ * @method static find(mixed $idAdmin)
+ * @method static where(string $string, string $string1, int $id)
+ */
 class Admin extends Model
 {
-
     protected $fillable = array('name', 'surname', 'password', 'email');
+    private $name;
+    private $surname;
+    protected $email;
+    private $password;
 
-    /**
-     * Check if a user is logged in.
-     * @return bool
-     */
-    public static function isLogin()
+    public static function isLogin(): bool
     {
-
-        if ( !Session::has( 'admin' ) )
-        {
+        if ( ! Session::has('admin')) {
             return false;
         }
-        $idAdmin = Session::get( 'admin' );
-        $AdminExist = Admin::find( $idAdmin );
+        $adminId = Session::get('admin');
+        $adminExist = Admin::find($adminId);
 
-        if ( !$AdminExist )
-        {
+        if ( ! $adminExist) {
             return false;
         }
 
@@ -34,58 +35,87 @@ class Admin extends Model
 
     public static function getInfo()
     {
-        $idAdmin = Session::get( 'admin' );
-        $AdminExist = Admin::find( $idAdmin );
-
-        return $AdminExist;
+        $adminId = Session::get('admin');
+        return Admin::find($adminId);
     }
 
-    public static function addAdmin( $request )
+    public static function addAdmin(Request $request): bool
     {
-        $NewAdmin = new Admin();
-        $NewAdmin->name = $request->name;
-        $NewAdmin->surname = $request->surname;
-        $NewAdmin->email = $request->email;
-        $NewAdmin->password = sha1( $request->password );
+        $newAdmin = new Admin();
+        $newAdmin->setName($request->get('name'));
+        $newAdmin->setSurname($request->get('surname'));
+        $newAdmin->setEmail($request->get('email'));
+        $newAdmin->setPassword($request->get('password'));
 
-        if ( $NewAdmin->save() )
-        {
+        if ($newAdmin->save()) {
             return true;
         }
 
         return false;
     }
 
-    public static function updateAdmin( $request, $admin )
+    public static function updateAdmin(Request $request, Admin $admin): bool
     {
-        if ( $request->password )
-        {
-            $update = $admin->update( [
-                'name' => $request->name,
-                'surname' => $request->surname,
-                'email' => $request->email,
-                'password' => sha1( $request->password )
-            ] );
-        } else
-        {
-            $update = $admin->update( [
-                'name' => $request->name,
-                'surname' => $request->surname,
-                'email' => $request->email,
-            ] );
+        if ($request->get('password')) {
+            $update = $admin->update([
+                'name' => $request->get('name'),
+                'surname' => $request->get('surname'),
+                'email' => $request->get('email'),
+                'password' => sha1($request->get('password'))
+            ]);
+        } else {
+            $update = $admin->update([
+                'name' => $request->get('name'),
+                'surname' => $request->get('surname'),
+                'email' => $request->get('email'),
+            ]);
         }
 
-        if ( $update )
-        {
-            return true;
-        }
-
-        return false;
+        return $update;
     }
 
-    public static function GetAll()
+    public static function getAll()
     {
         return Admin::all();
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
 }

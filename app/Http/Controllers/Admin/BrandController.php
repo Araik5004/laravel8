@@ -101,7 +101,7 @@ class BrandController extends BaseController
         return response()->json(['status' => 1]);
     }
 
-    public function orderingBrand(Request $request): bool
+    public function orderingBrand(Request $request): Response
     {
         $orders = json_decode($request->get('ordering'));
         foreach ($orders as $value) {
@@ -111,10 +111,10 @@ class BrandController extends BaseController
             }
 
             if ( ! $question->save()) {
-                return false;
+                return response()->json(['status' => 0]);
             }
         }
 
-        return true;
+        return response()->json(['status' => 1]);
     }
 }

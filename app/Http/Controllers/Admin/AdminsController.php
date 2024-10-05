@@ -1,131 +1,83 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
+use App\Http\Requests\Admin\AdminCreateRequest;
+use App\Http\Requests\Admin\AdminUpdateRequest;
 use App\Models\Admin;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminsController extends BaseController
 {
-
     public $data = [];
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $this->data['admins'] = Admin::GetAll();
-        return view('Administrator.admins.index' , $this->data);
-    }
-    
-   
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index(): View
+    {
+        $this->data['admins'] = Admin::getAll();
+        return view('Administrator.admins.index', $this->data);
+    }
+
+    public function create(): View
     {
         return view('Administrator.admins.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(AdminCreateRequest $request): Response
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'surname' => 'required',
-            'password' => 'required',
-            'email' => 'required|email|unique:admins',
-        ]);
+        $addAdmin = Admin::addAdmin($request);
 
-        $InsertAdmin = Admin::addAdmin($request);
-        
-        if(!$InsertAdmin) 
-        {
-            $request->session()->flash( 'error_add' , trans('admin.error_add') );
+        if ( ! $addAdmin) {
+            $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->route('Admins');
         }
 
-        $request->session()->flash( 'dane_add' , trans('admin.dane_add') );
+        $request->session()->flash('dane_add', trans('admin.dane_add'));
         return redirect()->route('Admins');
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View | Response
      */
     public function edit($id)
     {
         $admin = Admin::find($id);
-        
-        if(!$admin) 
-        {
+
+        if ( ! $admin) {
             return redirect()->back();
         }
-        
+
         $this->data['admin'] = $admin;
-        return view('Administrator.admins.edit' , $this->data);
+        return view('Administrator.admins.edit', $this->data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(AdminUpdateRequest $request, int $id): Response
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'surname' => 'required',
-            'email' => 'required|email',
-        ]);
-        
-        $count = Admin::where('id', '!=', $id)->where('email', $request->email)->count();
-        
-        if ($count) 
-        {
-           return redirect()->route('Admins');
-        }
-        
         $admin = Admin::find($id);
 
-        if(!$admin) 
-        {
+        if ( ! $admin) {
             return redirect()->back();
         }
-        
-        $updateAdmin = Admin::updateAdmin($request , $admin);
-        
-        if(!$updateAdmin) 
-        {
-            $request->session()->flash( 'error_add' , trans('admin.error_add') );
+
+        $updateAdmin = Admin::updateAdmin($request, $admin);
+
+        if ( ! $updateAdmin) {
+            $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->route('Admins');
         }
 
-        $request->session()->flash( 'dane_add' , trans('admin.dane_add') );
+        $request->session()->flash('dane_add', trans('admin.dane_add'));
         return redirect()->route('Admins');
     }
 
 
-    public function remove( Request $request) 
+    public function remove(Request $request): Response
     {
-        $id = $request->id;
+        $id = $request->get('id');
         $admin = Admin::find($id);
 
-        if(!$admin || !$admin->delete()) 
-        {
+        if ( ! $admin || ! $admin->delete()) {
             return response()->json(['status' => 0]);
         }
         return response()->json(['status' => 1]);
