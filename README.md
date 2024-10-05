@@ -1,4 +1,4 @@
-1. )
+1 )
 git clone https://github.com/Araik5004/laravel8.git
 
 2 ) go into dir "laravel8" :
@@ -17,7 +17,7 @@ php artisan key:generate
 add params to ".env" file for Database eg :
 DB_DATABASE=laravel8
 DB_USERNAME=root
-DB_PASSWORD=root
+DB_PASSWORD=
 
 7 ) migrate all tables :
 php artisan migrate
