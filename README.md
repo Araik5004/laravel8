@@ -1,4 +1,4 @@
-1 )
+1. )
 git clone https://github.com/Araik5004/laravel8.git
 
 2 ) go into dir "laravel8" :
