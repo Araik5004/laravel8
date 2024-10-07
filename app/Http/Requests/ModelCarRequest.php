@@ -15,7 +15,7 @@ class ModelCarRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'brand' => 'required|numeric|gt:0'
+            'brand' => 'required', 'numeric', 'gt:0'
         ];
     }
 

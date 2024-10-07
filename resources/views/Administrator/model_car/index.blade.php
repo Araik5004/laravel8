@@ -6,7 +6,7 @@
     <div class="x_panel admin_container">
         <div class="x_title">
             <h2>{{ trans('admin.modelcar.main_title') }}</h2>
-            <a class="btn btn-primary btn-sm pull-right" href="{{ route('modelcars.create') }}"> 
+            <a class="btn btn-primary btn-sm pull-right" href="{{ route('modelcars.create') }}">
                 <i class="fa fa-plus"></i> {{ trans('admin.add') }}
             </a>
             <div class="clearfix"></div>
@@ -53,7 +53,7 @@
                         <td>{{ $item->brand_name }}</td>
                         <td>{{ $item->name }}</td>
                         <td>
-                            <a class="btn btn-primary btn-sm pull-right" 
+                            <a class="btn btn-primary btn-sm pull-right"
                                href="{{ route('modelcars.edit' , $item->id) }}"> <i class="fa fa-edit"></i> {{ trans('admin.edit') }}</a>
                             <button class="btn btn-danger btn-sm pull-right deleteItem" data-id="{{ $item->id }}"> <i class="fa fa-trash"></i> {{ trans('admin.remove') }}</button>
                         </td>
@@ -74,7 +74,7 @@
     <div class="x_title">
         <img src="/Administrator/images/not_found.png" alt="image" width="20" height="20" >
         {{ trans('admin.modelcar.add') }}
-        <a class="btn btn-primary btn-sm pull-right" href="{{ route('modelcars.create') }}"> 
+        <a class="btn btn-primary btn-sm pull-right" href="{{ route('modelcars.create') }}">
             <i class="fa fa-plus"></i> {{ trans('admin.add') }}
         </a>
         <div class="clearfix"></div>
@@ -88,7 +88,7 @@
         var ItemId = $(this).data('id');
 
         $.ajax({
-            url: "{{ route('AdminChangeStatusModelcar') }}",
+            url: "{{ route('AdminChangeStatusModelCar') }}",
             type: 'post',
             dataType: 'json',
             data: {'id': ItemId}
@@ -146,7 +146,7 @@
 </script>
 <script>
 
-    function changeordering()
+    function changeOrdering()
     {
         var multi = $('.sort');
         var arr = [];
@@ -156,7 +156,7 @@
         }
         arr = JSON.stringify(arr);
         $.ajax({
-            url: "{{ route('orderingModelcar') }}",
+            url: "{{ route('orderingModelCar') }}",
             type: "POST",
             data: "_token={{csrf_token()}}" + "&ordering=" + arr
         })
@@ -198,7 +198,7 @@
                         $('.admin_container tbody tr:nth-child(' + i + ') .sort').html(i + $k).attr('data-ordering', i + $k);
                     }
                 }
-                changeordering();
+                changeOrdering();
             }
         });
     });

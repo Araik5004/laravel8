@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\View;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class BaseController extends Controller
