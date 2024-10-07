@@ -28,7 +28,7 @@ class BrandRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Поле "Название" не введенно'
+            'name.required' => 'Поле "Название" не введено'
         ];
     }
 }
