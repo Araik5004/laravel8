@@ -2,174 +2,124 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Modelcar;
-use App\Http\Requests\CarRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CarController extends BaseController
 {
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
         $items = Car::GetAll();
-        return view( 'Administrator.car.index', [
+        return view('Administrator.car.index', [
             'items' => $items,
-                ] );
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): View
     {
-        $modelcars = Modelcar::GetAll();
-        return view( 'Administrator.car.add', [
-            'modelcars' => $modelcars
-                ] );
+        return view('Administrator.car.add', [
+            'modelcars' => Modelcar::GetAll()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  App\Http\Requests\CarRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store( CarRequest $request )
+    public function store(CarRequest $request): Response
     {
-        $CarInsert = Car::AddCars( $request );
-        if ( !$CarInsert )
-        {
-            $request->session()->flash( 'error_add', trans( 'admin.error_add' ) );
+        $CarInsert = Car::AddCars($request);
+        if ( ! $CarInsert) {
+            $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
         }
 
-        $request->session()->flash( 'dane_add', trans( 'admin.dane_add' ) );
+        $request->session()->flash('dane_add', trans('admin.dane_add'));
 
-        return redirect()->route( 'cars.index' );
+        return redirect()->route('cars.index');
+    }
+
+    public function show(int $id): void
+    {
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View | Response
      */
-    public function show( $id )
+    public function edit(int $id)
     {
-        
-    }
+        $item = Car::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit( $id )
-    {
-        $item = Car::find( $id );
-
-        if ( !$item )
-        {
+        if ( ! $item) {
             return redirect()->back();
         }
         $modelcars = Modelcar::GetAll();
 
-        return view( 'Administrator.car.edit', [
+        return view('Administrator.car.edit', [
             'item' => $item,
             'modelcars' => $modelcars
-                ] );
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  App\Http\Requests\CarRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update( CarRequest $request, $id )
+    public function update(CarRequest $request, int $id): Response
     {
-        $Car = Car::find( $id );
+        $car = Car::find($id);
 
-        if ( !$Car )
-        {
+        if ( ! $car) {
             return redirect()->back();
         }
 
-        $CarUpdate = Car::UpdateCars( $request, $Car );
+        $carUpdate = Car::UpdateCars($request, $car);
 
-        if ( !$CarUpdate )
-        {
-            $request->session()->flash( 'error_add', trans( 'admin.error_add' ) );
+        if ( ! $carUpdate) {
+            $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
         }
 
-        $request->session()->flash( 'dane_add', trans( 'admin.dane_add' ) );
+        $request->session()->flash('dane_add', trans('admin.dane_add'));
 
-        return redirect()->route( 'cars.index' );
+        return redirect()->route('cars.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy( $id )
+    public function destroy(int $id): Response
     {
-        $Car = Car::find( $id );
-        if ( !$Car || !$Car->delete() )
-        {
-            return response()->json( ['status' => 0] );
+        $car = Car::find($id);
+        if ( ! $car || ! $car->delete()) {
+            return response()->json(['status' => 0]);
         }
-        return response()->json( ['status' => 1] );
+        return response()->json(['status' => 1]);
     }
 
-    public function changeStatus( Request $request )
+    public function changeStatus(Request $request): Response
     {
-        $ID = $request->id;
-        $Car = Car::find( $ID );
-        if ( !$Car )
-        {
-            return response()->json( ['status' => 0] );
+        $id = $request->get('id');
+        $car = Car::find($id);
+        if ( ! $car) {
+            return response()->json(['status' => 0]);
         }
 
-        $Car->status = $Car->status ? 0 : 1;
-        if ( !$Car->update() )
-        {
-            return response()->json( ['status' => 0] );
+        $car->status = $car->status ? 0 : 1;
+        if ( ! $car->update()) {
+            return response()->json(['status' => 0]);
         }
 
-        return response()->json( ['status' => 1] );
+        return response()->json(['status' => 1]);
     }
 
-    public function orderingCar( Request $request )
+    public function orderingCar(Request $request): bool
     {
-        $orders = json_decode( $request->ordering );
-        foreach ( $orders as $value )
-        {
-            $question = Car::find( $value[ 0 ] );
-            if ( $question )
-            {
-                $question->sort = $value[ 1 ];
+        $orders = json_decode($request->get('ordering'));
+        foreach ($orders as $value) {
+            $question = Car::find($value[0]);
+            if ($question) {
+                $question->sort = $value[1];
             }
 
-            if ( !$question->save() )
-            {
+            if ( ! $question->save()) {
                 return false;
             }
         }
 
-        return "success";
+        return true;
     }
-
 }
