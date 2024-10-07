@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Session;
 
 /**
  * @method static find(mixed $idAdmin)
- * @method static where(string $string, string $string1, int $id)
  */
 class Admin extends Model
 {
@@ -23,10 +22,8 @@ class Admin extends Model
         if ( ! Session::has('admin')) {
             return false;
         }
-        $adminId = Session::get('admin');
-        $adminExist = Admin::find($adminId);
 
-        if ( ! $adminExist) {
+        if ( ! Admin::find(Session::get('admin'))) {
             return false;
         }
 

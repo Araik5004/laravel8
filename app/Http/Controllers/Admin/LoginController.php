@@ -2,52 +2,45 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\AdminLoginSingInRequest;
 use App\Models\Admin;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends BaseController
 {
-
     public function index()
     {
-        return view( 'Administrator.login.index' );
+        return view('Administrator.login.index');
     }
 
-    public function singin( Request $request )
+    public function singIn(AdminLoginSingInRequest $request): Response
     {
-        $this->validate( $request, [
-            'password' => 'required',
-            'email' => 'required|email'
-        ] );
+        $admin = Admin::where('email', $request->get('email'))
+            ->where('password', sha1($request->get('password')))
+            ->first();
 
-        $AdminExist = Admin::where( 'email', $request->get('email') )
-                ->where( 'password', sha1( $request->get('password') ) )
-                ->first();
-
-        if ( !$AdminExist )
-        {
+        if ( ! $admin) {
             return redirect()->back();
         }
 
-        Session::put( 'admin', $AdminExist->id );
+        Session::put('admin', $admin->id);
 
-        return redirect()->route( 'AdminMainPage' );
+        return redirect()->route('AdminMainPage');
     }
 
-    public function logout()
+    public function logout(): Response
     {
-        if ( Admin::isLogin() )
-        {
-            Session::forget( 'admin' );
-            return response()->json( [
-                        'status' => 1
-                    ] );
+        if (Admin::isLogin()) {
+            Session::forget('admin');
+
+            return response()->json([
+                'status' => 1
+            ]);
         }
 
-        return response()->json( [
-                    'status' => 0
-                ] );
+        return response()->json([
+            'status' => 0
+        ]);
     }
-
 }

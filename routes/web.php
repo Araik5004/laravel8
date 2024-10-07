@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('admin/login', [LoginController::class, 'index'])->middleware('AdminLogin')->name('LoginPageAdmin');
-Route::post('admin/singin', [LoginController::class, 'singin'])->middleware('AdminLogin')->name('LoginAdmin');
+Route::post('admin/singin', [LoginController::class, 'singIn'])->middleware('AdminLogin')->name('LoginAdmin');
 Route::post('admin/logout', [LoginController::class, 'logout'])->name('LogoutAdmin');
 
 Route::middleware('admin')->group(function () {
