@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin;
-use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends BaseController
 {
@@ -21,8 +21,8 @@ class LoginController extends BaseController
             'email' => 'required|email'
         ] );
 
-        $AdminExist = Admin::where( 'email', $request->email )
-                ->where( 'password', sha1( $request->password ) )
+        $AdminExist = Admin::where( 'email', $request->get('email') )
+                ->where( 'password', sha1( $request->get('password') ) )
                 ->first();
 
         if ( !$AdminExist )
@@ -33,7 +33,6 @@ class LoginController extends BaseController
         Session::put( 'admin', $AdminExist->id );
 
         return redirect()->route( 'AdminMainPage' );
-        //LoginPageAdmin
     }
 
     public function logout()
