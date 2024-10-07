@@ -13,14 +13,14 @@ class BrandController extends BaseController
     public function index(): View
     {
         $items = Brand::getAll();
-        return view('Administrator.brand.index', [
+        return view('administrator.brand.index', [
             'items' => $items
         ]);
     }
 
     public function create(): View
     {
-        return view('Administrator.brand.add');
+        return view('administrator.brand.add');
     }
 
     public function store(BrandRequest $request): Response
@@ -52,7 +52,7 @@ class BrandController extends BaseController
             return redirect()->back();
         }
 
-        return view('Administrator.brand.edit', ['item' => $item]);
+        return view('administrator.brand.edit', ['item' => $item]);
     }
 
     public function update(BrandRequest $request, int $id): Response

@@ -16,7 +16,7 @@ class IndexController extends BaseController
         $brands = Brand::all();
         $models = Modelcar::all();
         $cars = Car::all();
-        return view('Administrator.index.index', [
+        return view('administrator.index.index', [
             'brands' => $brands->count(),
             'models' => $models->count(),
             'cars' => $cars->count(),

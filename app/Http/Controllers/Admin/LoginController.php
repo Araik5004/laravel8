@@ -11,7 +11,7 @@ class LoginController extends BaseController
 {
     public function index()
     {
-        return view('Administrator.login.index');
+        return view('administrator.login.index');
     }
 
     public function singIn(AdminLoginSingInRequest $request): Response

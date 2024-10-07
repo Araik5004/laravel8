@@ -16,12 +16,12 @@ class AdminsController extends BaseController
     public function index(): View
     {
         $this->data['admins'] = Admin::getAll();
-        return view('Administrator.admins.index', $this->data);
+        return view('administrator.admins.index', $this->data);
     }
 
     public function create(): View
     {
-        return view('Administrator.admins.add');
+        return view('administrator.admins.add');
     }
 
     public function store(AdminCreateRequest $request): Response
@@ -49,7 +49,7 @@ class AdminsController extends BaseController
         }
 
         $this->data['admin'] = $admin;
-        return view('Administrator.admins.edit', $this->data);
+        return view('administrator.admins.edit', $this->data);
     }
 
     public function update(AdminUpdateRequest $request, int $id): Response

@@ -13,14 +13,14 @@ class CarController extends BaseController
 {
     public function index(): View
     {
-        return view('Administrator.car.index', [
+        return view('administrator.car.index', [
             'items' => Car::GetAll(),
         ]);
     }
 
     public function create(): View
     {
-        return view('Administrator.car.add', [
+        return view('administrator.car.add', [
             'modelcars' => Modelcar::GetAll()
         ]);
     }
@@ -53,7 +53,7 @@ class CarController extends BaseController
             return redirect()->back();
         }
 
-        return view('Administrator.car.edit', [
+        return view('administrator.car.edit', [
             'item' => $item,
             'modelcars' => Modelcar::GetAll()
         ]);

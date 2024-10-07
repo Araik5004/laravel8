@@ -14,14 +14,14 @@ class ModelCarController extends BaseController
 {
     public function index(): View
     {
-        return view('Administrator.model_car.index', [
+        return view('administrator.model_car.index', [
             'items' => Modelcar::GetAll(),
         ]);
     }
 
     public function create(): View
     {
-        return view('Administrator.model_car.add', [
+        return view('administrator.model_car.add', [
             'brands' => Brand::getAll()
         ]);
     }
@@ -56,7 +56,7 @@ class ModelCarController extends BaseController
         }
         $brands = Brand::getAll();
 
-        return view('Administrator.model_car.edit', [
+        return view('administrator.model_car.edit', [
             'item' => $item,
             'brands' => $brands
         ]);
