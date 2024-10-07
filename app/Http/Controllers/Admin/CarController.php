@@ -13,9 +13,8 @@ class CarController extends BaseController
 {
     public function index(): View
     {
-        $items = Car::GetAll();
         return view('Administrator.car.index', [
-            'items' => $items,
+            'items' => Car::GetAll(),
         ]);
     }
 
@@ -28,8 +27,8 @@ class CarController extends BaseController
 
     public function store(CarRequest $request): Response
     {
-        $CarInsert = Car::AddCars($request);
-        if ( ! $CarInsert) {
+        $carInsert = Car::AddCars($request);
+        if ( ! $carInsert) {
             $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
         }
@@ -53,11 +52,10 @@ class CarController extends BaseController
         if ( ! $item) {
             return redirect()->back();
         }
-        $modelcars = Modelcar::GetAll();
 
         return view('Administrator.car.edit', [
             'item' => $item,
-            'modelcars' => $modelcars
+            'modelcars' => Modelcar::GetAll()
         ]);
     }
 
@@ -98,7 +96,7 @@ class CarController extends BaseController
             return response()->json(['status' => 0]);
         }
 
-        $car->status = $car->status ? 0 : 1;
+        $car->status = ! $car->status;
         if ( ! $car->update()) {
             return response()->json(['status' => 0]);
         }
