@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\BrandRequest;
+use App\Http\Requests\Admin\BrandRequest;
 use App\Models\Brand;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;

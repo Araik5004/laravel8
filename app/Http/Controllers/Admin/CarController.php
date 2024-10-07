@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CarRequest;
+use App\Http\Requests\Admin\CarRequest;
 use App\Models\Car;
 use App\Models\Modelcar;
 use Illuminate\Contracts\View\View;

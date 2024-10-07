@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\ModelCarOrderingRequest;
 use App\Http\Requests\Admin\ModelChangeStatusRequest;
-use App\Http\Requests\ModelCarRequest;
+use App\Http\Requests\Admin\ModelCarRequest;
 use App\Models\Brand;
 use App\Models\Modelcar;
 use Illuminate\Contracts\View\View;
