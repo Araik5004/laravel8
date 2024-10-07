@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Modelcar;
 use App\Models\Brand;
-use App\Http\Requests\ModelcarRequest;
+use App\Http\Requests\ModelCarRequest;
 
 class ModelcarController extends BaseController
 {
@@ -42,7 +42,7 @@ class ModelcarController extends BaseController
      * @param  App\Http\Requests\ModelcarRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( ModelcarRequest $request )
+    public function store( ModelCarRequest $request )
     {
 
         $ModelcarInsert = Modelcar::AddModelcars( $request );
@@ -98,7 +98,7 @@ class ModelcarController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( ModelcarRequest $request, $id )
+    public function update( ModelCarRequest $request, $id )
     {
         $Modelcar = Modelcar::find( $id );
 
