@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\ModelCarOrderingRequest;
-use App\Http\Requests\Admin\ModelChangeStatusRequest;
 use App\Http\Requests\Admin\ModelCarRequest;
+use App\Http\Requests\Admin\ModelChangeStatusRequest;
 use App\Models\Brand;
 use App\Models\Modelcar;
 use Illuminate\Contracts\View\View;
@@ -44,10 +44,7 @@ class ModelCarController extends BaseController
     {
     }
 
-    /**
-     * @return View | Response
-     */
-    public function edit(int $id)
+    public function edit(int $id): View|Response
     {
         $item = Modelcar::find($id);
 

@@ -41,10 +41,7 @@ class BrandController extends BaseController
     {
     }
 
-    /**
-     * @return Response | View
-     */
-    public function edit(int $id)
+    public function edit(int $id): Response|View
     {
         $item = Brand::find($id);
 

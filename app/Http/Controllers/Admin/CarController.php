@@ -42,10 +42,7 @@ class CarController extends BaseController
     {
     }
 
-    /**
-     * @return View | Response
-     */
-    public function edit(int $id)
+    public function edit(int $id): View|Response
     {
         $item = Car::find($id);
 

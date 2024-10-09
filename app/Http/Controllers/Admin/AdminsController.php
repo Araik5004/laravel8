@@ -37,10 +37,7 @@ class AdminsController extends BaseController
         return redirect()->route('Admins');
     }
 
-    /**
-     * @return View | Response
-     */
-    public function edit($id)
+    public function edit($id): View|Response
     {
         $admin = Admin::find($id);
 

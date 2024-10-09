@@ -8,10 +8,7 @@ use Illuminate\Http\Request;
 
 class Admin
 {
-    /**
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         if ( ! AdminAlias::isLogin()) {
             return redirect()->route('LoginPageAdmin');
