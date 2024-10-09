@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
-
     public static function AddCars( $request )
     {
         $cars = new Car();
@@ -55,7 +54,7 @@ class Car extends Model
             $image_src = '/uploads/car/' . $fileName;
             $cars->image = $image_src;
         }
-        
+
         if ( $cars->update() )
         {
             return true;

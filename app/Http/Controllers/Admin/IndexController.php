@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Brand;
 use App\Models\Car;
-use App\Models\Modelcar;
+use App\Models\ModelCar;
 use Illuminate\Contracts\View\View;
 
 class IndexController extends BaseController
@@ -14,7 +14,7 @@ class IndexController extends BaseController
     public function index(): View
     {
         $brands = Brand::all();
-        $models = Modelcar::all();
+        $models = ModelCar::all();
         $cars = Car::all();
         return view('administrator.index.index', [
             'brands' => $brands->count(),

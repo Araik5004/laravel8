@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CarRequest;
 use App\Models\Car;
-use App\Models\Modelcar;
+use App\Models\ModelCar;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ class CarController extends BaseController
     public function create(): View
     {
         return view('administrator.car.add', [
-            'modelcars' => Modelcar::GetAll()
+            'modelcars' => ModelCar::GetAll()
         ]);
     }
 
@@ -52,7 +52,7 @@ class CarController extends BaseController
 
         return view('administrator.car.edit', [
             'item' => $item,
-            'modelcars' => Modelcar::GetAll()
+            'modelcars' => ModelCar::GetAll()
         ]);
     }
 

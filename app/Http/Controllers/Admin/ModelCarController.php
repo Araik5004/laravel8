@@ -6,7 +6,7 @@ use App\Http\Requests\Admin\ModelCarOrderingRequest;
 use App\Http\Requests\Admin\ModelCarRequest;
 use App\Http\Requests\Admin\ModelChangeStatusRequest;
 use App\Models\Brand;
-use App\Models\Modelcar;
+use App\Models\ModelCar;
 use Illuminate\Contracts\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,7 +15,7 @@ class ModelCarController extends BaseController
     public function index(): View
     {
         return view('administrator.model_car.index', [
-            'items' => Modelcar::GetAll(),
+            'items' => ModelCar::GetAll(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class ModelCarController extends BaseController
 
     public function store(ModelCarRequest $request): Response
     {
-        $modelCarInsert = Modelcar::AddModelcars($request);
+        $modelCarInsert = ModelCar::AddModelCars($request);
 
         if ( ! $modelCarInsert) {
             $request->session()->flash('error_add', trans('admin.error_add'));
@@ -46,7 +46,7 @@ class ModelCarController extends BaseController
 
     public function edit(int $id): View|Response
     {
-        $item = Modelcar::find($id);
+        $item = ModelCar::find($id);
 
         if ( ! $item) {
             return redirect()->back();
@@ -61,13 +61,13 @@ class ModelCarController extends BaseController
 
     public function update(ModelCarRequest $request, int $id): Response
     {
-        $modelCar = Modelcar::find($id);
+        $modelCar = ModelCar::find($id);
 
         if ( ! $modelCar) {
             return redirect()->back();
         }
 
-        $modelCarUpdate = Modelcar::UpdateModelcars($request, $modelCar);
+        $modelCarUpdate = ModelCar::UpdateModelCar($request, $modelCar);
 
         if ( ! $modelCarUpdate) {
             $request->session()->flash('error_add', trans('admin.error_add'));
@@ -81,7 +81,7 @@ class ModelCarController extends BaseController
 
     public function destroy(int $id): Response
     {
-        $modelCar = Modelcar::find($id);
+        $modelCar = ModelCar::find($id);
         if ( ! $modelCar || ! $modelCar->delete()) {
             return response()->json(['status' => 0]);
         }
@@ -91,7 +91,7 @@ class ModelCarController extends BaseController
     public function changeStatus(ModelChangeStatusRequest $request): Response
     {
         $id = $request->get('id');
-        $modelCar = Modelcar::find($id);
+        $modelCar = ModelCar::find($id);
         if ( ! $modelCar) {
             return response()->json(['status' => 0]);
         }
@@ -108,7 +108,7 @@ class ModelCarController extends BaseController
     {
         $orders = json_decode($request->get('ordering'));
         foreach ($orders as $value) {
-            $question = Modelcar::find($value[0]);
+            $question = ModelCar::find($value[0]);
             if ($question) {
                 $question->sort = $value[1];
             }
