@@ -2,20 +2,15 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Admin;
 use Closure;
+use Illuminate\Http\Request;
 
 class AdminLogin
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
-        if( \App\Models\Admin::isLogin() ){
+        if (Admin::isLogin()) {
             return redirect()->route('AdminMainPage');
         }
         return $next($request);
