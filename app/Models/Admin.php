@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -12,10 +13,10 @@ use Illuminate\Support\Facades\Session;
 class Admin extends Model
 {
     protected $fillable = array('name', 'surname', 'password', 'email');
-    private $name;
-    private $surname;
-    protected $email;
-    private $password;
+    private string $name;
+    private string $surname;
+    protected string $email;
+    private string $password;
 
     public static function isLogin(): bool
     {
@@ -30,7 +31,7 @@ class Admin extends Model
         return true;
     }
 
-    public static function getInfo()
+    public static function getInfo(): mixed
     {
         $adminId = Session::get('admin');
         return Admin::find($adminId);
@@ -71,7 +72,7 @@ class Admin extends Model
         return $update;
     }
 
-    public static function getAll()
+    public static function getAll(): array|Collection
     {
         return Admin::all();
     }
@@ -86,17 +87,17 @@ class Admin extends Model
         $this->name = $name;
     }
 
-    public function getSurname()
+    public function getSurname(): string
     {
         return $this->surname;
     }
 
-    public function setSurname($surname)
+    public function setSurname($surname): void
     {
         $this->surname = $surname;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -106,7 +107,7 @@ class Admin extends Model
         $this->email = $email;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
