@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 /**
  * @method static find(int $id)
@@ -13,23 +14,30 @@ class Brand extends Model
     private int $sort;
     private string $name;
 
-    public static function addBrands($request)
+    public static function addBrands(Request $request): bool
     {
         $brands = new Brand();
-        $brands->status = $request->status === 'on' ? 1 : 0;
-        $max_sort = Brand::max('sort');
-        $brands->sort = $max_sort ? ++$max_sort : 1;
-        $brands->name = $request->name;
+
+        $status = $request->get('status') === 'on' ? 1 : 0;
+        $brands->setStatus($status);
+
+        $maxSort = Brand::max('sort');
+        $sort = $maxSort ? ++$maxSort : 1;
+        $brands->setSort($sort);
+
+        $brands->setName($request->get('name'));
+
         if ($brands->save()) {
             return true;
         }
         return false;
     }
 
-    public static function updateBrands($request, Brand $brands): bool
+    public static function updateBrands(Request $request, Brand $brands): bool
     {
-        $brands->status = $request->status === 'on' ? 1 : 0;
-        $brands->name = $request->name;
+        $status = $request->get('status') === 'on' ? 1 : 0;
+        $brands->setStatus($status);
+        $brands->setName($request->get('name'));
 
         if ($brands->update()) {
             return true;
