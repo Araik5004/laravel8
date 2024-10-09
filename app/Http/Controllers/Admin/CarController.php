@@ -27,7 +27,7 @@ class CarController extends BaseController
 
     public function store(CarRequest $request): Response
     {
-        $carInsert = Car::AddCars($request);
+        $carInsert = Car::AddCar($request);
         if ( ! $carInsert) {
             $request->session()->flash('error_add', trans('admin.error_add'));
             return redirect()->back();
