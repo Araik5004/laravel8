@@ -10,7 +10,7 @@ class AdminLoginSingInRequest extends FormRequest
     {
         return [
             'password' => 'required',
-            'email' => 'required', 'email'
+            'email' => ['required', 'email']
         ];
     }
 }

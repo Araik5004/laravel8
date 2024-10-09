@@ -12,7 +12,7 @@ class AdminCreateRequest extends FormRequest
             'name' => 'required',
             'surname' => 'required',
             'password' => 'required',
-            'email' => 'required|email|unique:admins',
+            'email' => ['required', 'email', 'unique:admins'],
         ];
     }
 }
