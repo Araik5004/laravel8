@@ -158,7 +158,7 @@ class Car extends Model
         $this->rent_price_per_day = $rentPricePerDay;
     }
 
-    private function setImage(string $image)
+    private function setImage(string $image): void
     {
         $this->image = $image;
     }
