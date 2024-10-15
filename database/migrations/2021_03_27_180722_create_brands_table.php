@@ -6,28 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBrandsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
-        Schema::create('brands', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table): void {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->tinyInteger( 'status' )->nullable();
-            $table->Integer( 'sort' )->nullable();
+            $table->tinyInteger('status')->nullable();
+            $table->Integer('sort')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('brands');
     }

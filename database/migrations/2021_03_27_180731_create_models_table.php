@@ -6,33 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateModelsTable extends Migration
 {
+    private const TABLE = 'model_cars';
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
-        Schema::create( 'modelcars', function (Blueprint $table)
-        {
-            $table->increments( 'id' );
-            $table->integer( 'brand' )->index();
-            $table->string( 'name' )->nullable();
-            $table->tinyInteger( 'status' )->nullable();
-            $table->Integer( 'sort' )->nullable();
+        Schema::create(self::TABLE, function (Blueprint $table): void {
+            $table->increments('id');
+            $table->integer('brand')->index();
+            $table->string('name')->nullable();
+            $table->tinyInteger('status')->nullable();
+            $table->Integer('sort')->nullable();
             $table->timestamps();
-        } );
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists( 'models' );
+        Schema::dropIfExists(self::TABLE);
     }
-
 }

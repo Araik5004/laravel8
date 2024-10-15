@@ -2,24 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BrandsSeeder extends Seeder
 {
-
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         $brands = [];
-        for ( $i = 1; $i <= 3; $i++ )
-        {
+        for ($i = 1; $i <= 3; $i++) {
             $brands[] = [
-                'name' => 'brand ' . $i,
+                'name' => 'brand '.$i,
                 'status' => 1,
                 'sort' => $i,
                 'created_at' => Carbon::now(),
@@ -27,7 +21,6 @@ class BrandsSeeder extends Seeder
             ];
         }
 
-        \DB::table( 'brands' )->insert( $brands );
+        DB::table('brands')->insert($brands);
     }
-
 }
