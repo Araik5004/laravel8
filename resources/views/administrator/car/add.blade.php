@@ -19,48 +19,48 @@
         @endif
         <div class="x_content">
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                <form id="demo-form2"  class="form-horizontal form-label-left" 
-                      method="post" enctype="multipart/form-data" 
+                <form id="demo-form2"  class="form-horizontal form-label-left"
+                      method="post" enctype="multipart/form-data"
                       action="{{ route('cars.store') }}">
                     @csrf
                     <div id="myTabContent" class="tab-content">
-                       
-                        
+
+
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12 "  for="first-name">
-                                {{  trans('admin.car.image')}} 
+                                {{  trans('admin.car.image')}}
                                 <span class="required">*</span>
                             </label>
-                            
+
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="file" accept=".jpg, .jpeg, .png" id="first-name" 
-                                       name="file" data-fileuploader-limit="1" required  
+                                <input type="file" accept=".jpg, .jpeg, .png" id="first-name"
+                                       name="file" data-fileuploader-limit="1" required
                                        class="form-control col-md-7 col-xs-12">
                             </div>
                             <p>{{trans('admin.format')}}</p>
                             <p>{{trans('admin.maxsize')}}</p>
                             @if($errors->has('fileuploader-list-file'))
-                            <p style="color: red" >{{trans('admin.selectimage')}}</p>
+                            <p style="color: red" >{{trans('admin.select_image')}}</p>
                             @elseif($errors->has('file.*'))
-                            <p style="color: red" >{{trans('admin.notvalidimage')}}</p>
+                            <p style="color: red" >{{trans('admin.not_valid_image')}}</p>
                             @endif
                         </div>
-                        
+
                         <div class="form-group {{ $errors->has('year') ? 'bad' : '' }}">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
                             {{  trans('admin.car.year')}}
                             <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" 
-                                   value="{{old('year')}}" 
-                                   name="year" 
+                            <input type="text"
+                                   value="{{old('year')}}"
+                                   name="year"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
                         </div>
                     </div>
-                        
+
                         <div class="form-group {{ $errors->has('brand') ? 'bad' : '' }}">
                             <label @php echo $errors->has( 'brand' ) ? 'style="color: red"' : ''; @endphp class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                     {{trans('admin.modelcar.main_title') }}
@@ -85,9 +85,9 @@
                             <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" 
-                                   value="{{old('number')}}" 
-                                   name="number" 
+                            <input type="text"
+                                   value="{{old('number')}}"
+                                   name="number"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
@@ -99,9 +99,9 @@
                             <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" 
-                                   value="{{old('color')}}" 
-                                   name="color" 
+                            <input type="text"
+                                   value="{{old('color')}}"
+                                   name="color"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
@@ -134,8 +134,8 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="number" step="0.01"
-                                   value="{{ old('rent_price_per_day') }}" 
-                                   name="rent_price_per_day" 
+                                   value="{{ old('rent_price_per_day') }}"
+                                   name="rent_price_per_day"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
@@ -160,7 +160,7 @@
                             <button type="submit" class="btn btn-success">
                                 {{  trans('admin.addsave')}}</button>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </form>
         </div>
@@ -172,14 +172,14 @@
 
 @push('js')
     <script>
-      
-$(document).ready(function () 
+
+$(document).ready(function ()
 {
      $('input[name="file"]').fileuploader({
         addMore: false,
         maxSize: 1 //1MB
         });
 });
-   
+
     </script>
     @endpush
