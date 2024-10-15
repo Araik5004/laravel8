@@ -158,7 +158,7 @@
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <button type="submit" class="btn btn-success">
-                                {{  trans('admin.addsave')}}</button>
+                                {{  trans('admin.add_save')}}</button>
                         </div>
                     </div>
                 </div>

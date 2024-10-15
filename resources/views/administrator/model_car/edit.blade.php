@@ -18,9 +18,9 @@
         @endif
         <div class="x_content">
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                <form 
-                    id="demo-form2"  
-                    class="form-horizontal form-label-left" 
+                <form
+                    id="demo-form2"
+                    class="form-horizontal form-label-left"
                     method="POST"
                     action="{{ route('modelcars.update' , $item->id) }}"
                     >
@@ -33,9 +33,9 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" 
-                                       value="@if(!empty($item->name)){{$item->name}}@else{{old('name')}}@endif" 
-                                       name="name" 
+                                <input type="text"
+                                       value="@if(!empty($item->name)){{$item->name}}@else{{old('name')}}@endif"
+                                       name="name"
                                        class="form-control col-md-7 col-xs-12"
                                        required
                                        >
@@ -50,7 +50,7 @@
                                     <select name="brand"  >
                                         <option value="0">{{trans('admin.modelcar.select_brand') }}</option>
                                         @forelse($brands as  $val)
-                                        
+
                                         @php
                                         $selected = '';
                                         if($val->id == $item->brand)
@@ -58,7 +58,7 @@
                                             $selected = 'selected';
                                         }
                                         @endphp
-                                        
+
                                         <option {{$selected}} value="{{$val->id}}">{{$val->name}}</option>
                                         @empty
 
@@ -81,9 +81,9 @@
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <button type="submit" class="btn btn-success">
-                                    {{  trans('admin.addsave')}}</button>
+                                    {{  trans('admin.add_save')}}</button>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </form>
             </div>

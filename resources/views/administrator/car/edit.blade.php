@@ -5,7 +5,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>{{  trans('admin.car.title_eddit')}}</h2>
+            <h2>{{  trans('admin.car.title_edit')}}</h2>
             <div class="clearfix"></div>
         </div>
         @if ($errors->any())
@@ -19,9 +19,9 @@
         @endif
         <div class="x_content">
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                <form 
-                    id="demo-form2"  
-                    class="form-horizontal form-label-left" 
+                <form
+                    id="demo-form2"
+                    class="form-horizontal form-label-left"
                     method="POST"
                     action="{{ route('cars.update' , $item->id) }}"
                     enctype="multipart/form-data"
@@ -30,17 +30,17 @@
                     <input name="update" type="hidden" value="1">
                     @csrf
                     <div id="myTabContent" class="tab-content">
-                       
-                        
+
+
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12 "  for="first-name">
-                                {{  trans('admin.car.image')}} 
+                                {{  trans('admin.car.image')}}
                                 <span class="required">*</span>
                             </label>
-                            
+
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="file" accept=".jpg, .jpeg, .png" id="first-name" 
-                                       name="file" data-fileuploader-limit="1"  
+                                <input type="file" accept=".jpg, .jpeg, .png" id="first-name"
+                                       name="file" data-fileuploader-limit="1"
                                        class="form-control col-md-7 col-xs-12">
                             </div>
                             <p>{{trans('admin.format')}}</p>
@@ -61,7 +61,7 @@
                                   <div class="col-md-4 " data-id="{{$item->id}}">
                                     <div class="thumbnail"  style="height:auto;">
                                       <div class="image view view-first">
-                                        <img style="width: 100%; display: block;" src="{{asset($item->image)}}" 
+                                        <img style="width: 100%; display: block;" src="{{asset($item->image)}}"
                                              alt="image" />
                                       </div>
                                     </div>
@@ -72,22 +72,22 @@
                           </div>
                         </div>
                         @endif
-                        
+
                         <div class="form-group {{ $errors->has('year') ? 'bad' : '' }}">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">
                             {{  trans('admin.car.year')}}
                             <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" 
-                                   value="@if(!empty($item->year)){{  $item->year }} @else{{old('year')}} @endif" 
-                                   name="year" 
+                            <input type="text"
+                                   value="@if(!empty($item->year)){{  $item->year }} @else{{old('year')}} @endif"
+                                   name="year"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
                         </div>
                     </div>
-                        
+
                         <div class="form-group {{ $errors->has('brand') ? 'bad' : '' }}">
                             <label @php echo $errors->has( 'brand' ) ? 'style="color: red"' : ''; @endphp class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                                     {{trans('admin.modelcar.main_title') }}
@@ -98,7 +98,7 @@
                                 <select name="model"  >
                                     <option value="0">{{trans('admin.car.select_modelcar') }}</option>
                                     @forelse($modelcars as  $val)
-                                    
+
                                         @php
                                         $selected = '';
                                         if($val->id == $item->model)
@@ -106,7 +106,7 @@
                                             $selected = 'selected';
                                         }
                                         @endphp
-                                    
+
                                     <option {{$selected}} value="{{$val->id}}">{{$val->name}}</option>
                                     @empty
 
@@ -121,9 +121,9 @@
                             <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" 
-                                   value="@if(!empty($item->number)){{  $item->number }} @else{{old('number')}} @endif" 
-                                   name="number" 
+                            <input type="text"
+                                   value="@if(!empty($item->number)){{  $item->number }} @else{{old('number')}} @endif"
+                                   name="number"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
@@ -135,9 +135,9 @@
                             <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" 
-                                   value="@if(!empty($item->color)){{  $item->color }} @else{{old('color')}} @endif" 
-                                   name="color" 
+                            <input type="text"
+                                   value="@if(!empty($item->color)){{  $item->color }} @else{{old('color')}} @endif"
+                                   name="color"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
@@ -158,7 +158,7 @@
                             <select name="transmission"  >
                                     <option value="0">{{trans('admin.car.select_transmission') }}</option>
                                     @foreach($transmission as $key =>  $val)
-                                    
+
                                     @php
                                         $selected = '';
                                         if($key == $item->transmission)
@@ -166,7 +166,7 @@
                                             $selected = 'selected';
                                         }
                                         @endphp
-                                    
+
                                         <option {{$selected}} value="{{$key}}">{{$val}}</option>
                                     @endforeach
                                 </select>
@@ -179,8 +179,8 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="number" step="0.01"
-                                   value="@if(!empty($item->rent_price_per_day)){{$item->rent_price_per_day }}@else{{old('rent_price_per_day')}} @endif" 
-                                   name="rent_price_per_day" 
+                                   value="@if(!empty($item->rent_price_per_day)){{$item->rent_price_per_day }}@else{{old('rent_price_per_day')}} @endif"
+                                   name="rent_price_per_day"
                                    class="form-control col-md-7 col-xs-12"
                                    required
                                    >
@@ -202,9 +202,9 @@
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <button type="submit" class="btn btn-success">
-                                {{  trans('admin.addsave')}}</button>
+                                {{  trans('admin.add_save')}}</button>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </form>
         </div>
@@ -216,14 +216,14 @@
 
 @push('js')
     <script>
-      
-$(document).ready(function () 
+
+$(document).ready(function ()
 {
      $('input[name="file"]').fileuploader({
         addMore: false,
         maxSize: 1 //1MB
         });
 });
-   
+
     </script>
     @endpush

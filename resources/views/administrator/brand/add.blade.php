@@ -18,7 +18,7 @@
         @endif
         <div class="x_content">
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                <form id="demo-form2"  class="form-horizontal form-label-left" 
+                <form id="demo-form2"  class="form-horizontal form-label-left"
                       method="post"
                       action="{{ route('brands.store') }}">
                     @csrf
@@ -29,9 +29,9 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" 
-                                       value="{{old('name')}}" 
-                                       name="name" 
+                                <input type="text"
+                                       value="{{old('name')}}"
+                                       name="name"
                                        class="form-control col-md-7 col-xs-12"
                                        required
                                        >
@@ -51,9 +51,9 @@
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <button type="submit" class="btn btn-success">
-                                    {{  trans('admin.addsave')}}</button>
+                                    {{  trans('admin.add_save')}}</button>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </form>
             </div>
