@@ -47,16 +47,16 @@ class ModelCar extends Model
 
     public static function GetAll(
         int $paginate = 10,
-        string $orderField = 'modelcars.sort',
+        string $orderField = 'model_cars.sort',
         string $ord_dir = 'asc'
     ) {
-        return ModelCar::leftjoin('brands', 'modelcars.brand', 'brands.id')
+        return ModelCar::leftjoin('brands', 'model_cars.brand', 'brands.id')
             ->select(
-                'modelcars.id'
-                , 'modelcars.brand'
-                , 'modelcars.name'
-                , 'modelcars.status'
-                , 'modelcars.sort'
+                'model_cars.id'
+                , 'model_cars.brand'
+                , 'model_cars.name'
+                , 'model_cars.status'
+                , 'model_cars.sort'
                 , 'brands.name as brand_name'
             )
             ->orderBy($orderField, $ord_dir)

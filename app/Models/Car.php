@@ -79,8 +79,8 @@ class Car extends Model
         string $order_field = 'cars.sort',
         string $ord_dir = 'asc'
     ): mixed {
-        return Car::leftjoin('modelcars', 'cars.model', 'modelcars.id')
-            ->leftjoin('brands', 'brands.id', 'modelcars.brand')
+        return Car::leftjoin('model_cars', 'cars.model', 'model_cars.id')
+            ->leftjoin('brands', 'brands.id', 'model_cars.brand')
             ->select(
                 'cars.id'
                 , 'cars.image'
@@ -91,7 +91,7 @@ class Car extends Model
                 , 'cars.rent_price_per_day'
                 , 'cars.status'
                 , 'cars.sort'
-                , 'modelcars.name as modelcar_name'
+                , 'model_cars.name AS modelcar_name'
                 , 'brands.name as brand_name'
             )
             ->orderBy($order_field, $ord_dir)

@@ -31,6 +31,10 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
+    @php
+        use App\Models\Admin;
+    @endphp
+
     <body class="nav-md">
         <div class="container body">
             <div class="main_container">
@@ -38,7 +42,12 @@
                     <div class="left_col scroll-view">
                         <div class="navbar nav_title" style="border: 0;">
                             <a href="/admin" class="site_title">
-                                <img width="150" height="50" src="/administrator/images/logo.jpg" alt="" />
+                                <img
+                                    width="150"
+                                    height="50"
+                                    src="{{ asset('/administrator/images/logo.jpg') }}"
+                                    alt="site_title"
+                                />
                             </a>
                         </div>
 
@@ -51,7 +60,7 @@
                             </div>
                             <div class="profile_info">
                                 <span>{{ trans('admin.welcome') }},</span>
-                                <h2>{{ App\Models\Admin::getInfo()->name }} {{ App\Models\Admin::getInfo()->surname }}</h2>
+                                <h2>{{ Admin::getInfo()->name }} {{ Admin::getInfo()->surname }}</h2>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -61,10 +70,15 @@
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <ul class="nav side-menu">
-                                    <li><a href="{{ route('brands.index') }}"><i class="fa fa-user"></i>Марки</span></a></li>
-                                    <li><a href="{{ route('modelcars.index') }}"><i class="fa fa-user"></i>Модели</span></a></li>
-                                    <li><a href="{{ route('cars.index') }}"><i class="fa fa-user"></i>Автомобили</span></a></li>
-                                    <li><a id="LogoutAdmin_2"><i class="fa fa-user"></i>Выход</span></a></li>
+                                    <li><a href="{{ route('brands.index') }}"><i class="fa fa-user"></i><span>Brands</span></a></li>
+                                    <li><a href="{{ route('modelcars.index') }}"><i class="fa fa-user"></i><span>Model</span></a></li>
+                                    <li><a href="{{ route('cars.index') }}"><i class="fa fa-user"></i><span>Cars</span></a></li>
+                                    <li>
+                                        <a id="LogoutAdmin_2">
+                                            <i class="fa fa-user"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -81,8 +95,8 @@
                             </div>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
-                                    <a href="javascript:;" class="user-profile dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
-                                        <img src="{{asset('/administrator/images/default_avatar.png')}}" alt="">{{ App\Models\Admin::getInfo()->name }} {{ App\Models\Admin::getInfo()->surname }}
+                                    <a href="javascript:" class="user-profile dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
+                                        <img src="{{asset('/administrator/images/default_avatar.png')}}" alt="">{{ Admin::getInfo()->name }} {{ Admin::getInfo()->surname }}
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -167,7 +181,7 @@
             delimiter: ',',
             persist: false
             });
-        var CSRFToken = $('meta[name=csrf-token]').attr("content");
+        let CSRFToken = $('meta[name=csrf-token]').attr("content");
 
         </script>
         <script>
