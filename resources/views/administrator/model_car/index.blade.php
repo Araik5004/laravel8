@@ -72,7 +72,7 @@
 @else
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_title">
-        <img src="/Administrator/images/not_found.png" alt="image" width="20" height="20" >
+        <img src="/administrator/images/not_found.png" alt="image" width="20" height="20" >
         {{ trans('admin.modelcar.add') }}
         <a class="btn btn-primary btn-sm pull-right" href="{{ route('modelcars.create') }}">
             <i class="fa fa-plus"></i> {{ trans('admin.add') }}

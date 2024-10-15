@@ -7,26 +7,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Каталог Автомобилей - Админ. Панель</title>
+        <title>Car Catalog - Admin Panel</title>
         <!-- Bootstrap -->
-        <link href="{{asset('/Administrator/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
         <!-- Font Awesome -->
-        <link href="{{asset('/Administrator/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
         <!-- NProgress -->
-        <link href="{{asset('/Administrator/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
 
-        <link href="{{asset('/Administrator/css/selectize.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/css/selectize.bootstrap3.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/css/selectize.legacy.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/vendors/pnotify/dist/pnotify.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/vendors/pnotify/dist/pnotify.buttons.css')}}" rel="stylesheet">
-        <link href="{{asset('/Administrator/vendors/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/css/selectize.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/css/selectize.bootstrap3.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/css/selectize.legacy.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/pnotify/dist/pnotify.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/pnotify/dist/pnotify.buttons.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/vendors/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet">
 
         <!-- Custom Theme Style -->
-        <link href="{{asset('/Administrator/build/css/custom.min.css')}}" rel="stylesheet">
+        <link href="{{asset('/administrator/build/css/custom.min.css')}}" rel="stylesheet">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
@@ -38,7 +38,7 @@
                     <div class="left_col scroll-view">
                         <div class="navbar nav_title" style="border: 0;">
                             <a href="/admin" class="site_title">
-                                <img width="150" height="50" src="/Administrator/images/logo.jpg" alt="" />
+                                <img width="150" height="50" src="/administrator/images/logo.jpg" alt="" />
                             </a>
                         </div>
 
@@ -47,7 +47,7 @@
                         <!-- menu profile quick info -->
                         <div class="profile clearfix">
                             <div class="profile_pic">
-                                <img src="{{asset('/Administrator/images/default_avatar.png')}}" alt="..." class="img-circle profile_img">
+                                <img src="{{asset('/administrator/images/default_avatar.png')}}" alt="..." class="img-circle profile_img">
                             </div>
                             <div class="profile_info">
                                 <span>{{ trans('admin.welcome') }},</span>
@@ -82,7 +82,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
-                                        <img src="{{asset('/Administrator/images/default_avatar.png')}}" alt="">{{ App\Models\Admin::getInfo()->name }} {{ App\Models\Admin::getInfo()->surname }}
+                                        <img src="{{asset('/administrator/images/default_avatar.png')}}" alt="">{{ App\Models\Admin::getInfo()->name }} {{ App\Models\Admin::getInfo()->surname }}
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -124,22 +124,22 @@
         </div>
 
         <!-- jQuery -->
-        <script src="{{asset('/Administrator/vendors/jquery/dist/jquery.min.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/jquery/dist/jquery.min.js')}}"></script>
         <!-- Bootstrap -->
-        <script src="{{asset('/Administrator/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <!-- FastClick -->
-        <script src="{{asset('/Administrator/vendors/fastclick/lib/fastclick.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/fastclick/lib/fastclick.js')}}"></script>
         <!-- NProgress -->
-        <script src="{{asset('/Administrator/vendors/nprogress/nprogress.js')}}"></script>
-        <script src="{{asset('/Administrator/vendors/iCheck/icheck.min.js')}}"></script>
-        <script src="{{asset('/Administrator/vendors/switchery/dist/switchery.min.js')}}"></script>
-        <script src="{{asset('/Administrator/vendors/select2/dist/js/select2.full.min.js')}}"></script>
-        <script src="{{asset('/Administrator/vendors/pnotify/dist/pnotify.js')}}"></script>
-        <script src="{{asset('/Administrator/vendors/pnotify/dist/pnotify.buttons.js')}}"></script>
-        <script src="{{asset('/Administrator/vendors/pnotify/dist/pnotify.nonblock.js')}}"></script>
-        <script src="{{asset('/Administrator/js/bootbox.min.js')}}"></script>
-        <script src="{{asset('/Administrator/js/ckeditor/ckeditor.js')}}"></script>
-        <script src="{{asset('/Administrator/js/standalone/selectize.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/nprogress/nprogress.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/iCheck/icheck.min.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/switchery/dist/switchery.min.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/select2/dist/js/select2.full.min.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/pnotify/dist/pnotify.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/pnotify/dist/pnotify.buttons.js')}}"></script>
+        <script src="{{asset('/administrator/vendors/pnotify/dist/pnotify.nonblock.js')}}"></script>
+        <script src="{{asset('/administrator/js/bootbox.min.js')}}"></script>
+        <script src="{{asset('/administrator/js/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{asset('/administrator/js/standalone/selectize.js')}}"></script>
         <link href="{{asset('Administrator/css/jquery.fileuploader.css')}}" rel="stylesheet">
         <script src="{{asset('Administrator/js/jquery.fileuploader.js')}}"></script>
         <script src="{{asset('Administrator/js/jquery-ui.min.js')}}"></script>
@@ -176,7 +176,7 @@
 
 
         <!-- Custom Theme Scripts -->
-        <script src="{{asset('/Administrator/build/js/custom.js')}}"></script>
+        <script src="{{asset('/administrator/build/js/custom.js')}}"></script>
         @stack('js')
 
 

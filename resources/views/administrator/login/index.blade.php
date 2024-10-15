@@ -8,17 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Каталог Автомобилей - Админ. Панель</title>
     <!-- Bootstrap -->
-    <link href="/Administrator/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/administrator/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="/Administrator/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/administrator/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="/Administrator/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/administrator/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Animate.css -->
-    <link href="/Administrator/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/administrator/vendors/animate.css/animate.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="/Administrator/build/css/custom.min.css" rel="stylesheet">
-    <link href="/Administrator/build/css/admin.css" rel="stylesheet">
+    <link href="/administrator/build/css/custom.min.css" rel="stylesheet">
+    <link href="/administrator/build/css/admin.css" rel="stylesheet">
   </head>
 
   <body class="login">

@@ -6,7 +6,7 @@
     <div class="x_panel admin_container">
         <div class="x_title">
             <h2>{{ trans('admin.brand.main_title') }}</h2>
-            <a class="btn btn-primary btn-sm pull-right" href="{{ route('brands.create') }}"> 
+            <a class="btn btn-primary btn-sm pull-right" href="{{ route('brands.create') }}">
                 <i class="fa fa-plus"></i> {{ trans('admin.add') }}
             </a>
             <div class="clearfix"></div>
@@ -51,7 +51,7 @@
 
                         <td>{{ $item->name }}</td>
                         <td>
-                            <a class="btn btn-primary btn-sm pull-right" 
+                            <a class="btn btn-primary btn-sm pull-right"
                                href="{{ route('brands.edit' , $item->id) }}"> <i class="fa fa-edit"></i> {{ trans('admin.edit') }}</a>
                             <button class="btn btn-danger btn-sm pull-right deleteItem" data-id="{{ $item->id }}"> <i class="fa fa-trash"></i> {{ trans('admin.remove') }}</button>
                         </td>
@@ -70,9 +70,9 @@
 @else
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_title">
-        <img src="/Administrator/images/not_found.png" alt="image" width="20" height="20" >
+        <img src="/administrator/images/not_found.png" alt="image" width="20" height="20" >
         {{ trans('admin.brand.add') }}
-        <a class="btn btn-primary btn-sm pull-right" href="{{ route('brands.create') }}"> 
+        <a class="btn btn-primary btn-sm pull-right" href="{{ route('brands.create') }}">
             <i class="fa fa-plus"></i> {{ trans('admin.add') }}
         </a>
         <div class="clearfix"></div>
@@ -143,7 +143,7 @@
 
 </script>
 <script>
-   
+
         function changeordering()
         {
             var multi = $('.sort');
@@ -181,7 +181,7 @@
 		                //update the html of the moved item to the current index
 		                $('.admin_container tbody tr:nth-child(' + (index + 1) + ') .sort').html(index+$k+1).attr('data-ordering', index+$k+1);
 
-		                if (start_pos < index) 
+		                if (start_pos < index)
                                 {
 		                    //update the items before the re-ordered item
 		                    for(var i=index; i > 0; i--)
